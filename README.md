@@ -1,7 +1,5 @@
 # personal-base
 Personal Project Basics
-
-# 开发目录结构
 ```
 ROOT
 .
@@ -29,6 +27,6 @@ ROOT
 └── README.md             Readme文件
 ```
 
-# 项目框架
+# 项目结构
 
 本项目为个人项目小知识
