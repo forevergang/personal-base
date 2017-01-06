@@ -30,6 +30,3 @@ if ($isnumeric || $_isnumeric || $pwdlength < 8 || $pwdlength > 16 || $letter) {
 } else {
     die('成立');
 }
-
-
-
