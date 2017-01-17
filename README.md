@@ -6,7 +6,7 @@ ROOT
 ├── _docs                 文档目录
 ├── app                   程序目录
 │   ├── RMB_TO_Capital    阿拉伯数字人民币转换大写
-│   ├── RMB_TO_Capital    阿拉伯数字人民币转换大写
+│   ├── JS_set_cookie     js设置cookie以及获取cookie值
 │   ├── 0.php             正则表达式
 │   │  
 │   ├──
