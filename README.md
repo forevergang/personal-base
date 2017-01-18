@@ -7,6 +7,8 @@ ROOT
 ├── app                   程序目录
 │   ├── RMB_TO_Capital    阿拉伯数字人民币转换大写
 │   ├── JS_set_cookie     js设置cookie以及获取cookie值
+│   ├── remote_auth       远程网站授权操纵(如：淘宝客网站域名授权)
+│   ├── sign_check.php    通过约定的字符密钥进行传出验签
 │   ├── 0.php             正则表达式
 │   │  
 │   ├──
