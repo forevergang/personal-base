@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>js通过插件设置cookie</title>
+</head>
+  <style type="text/css">
+    .mx-home-modal {
+      z-index: 2016;
+      font-size: 10px;
+      border: 1px solid #cbcbcb;
+      border-radius: 5px;
+      background: #ffffff;
+      position: fixed;
+      margin:auto;
+      left:0;
+      right:0;
+      top:0;
+      bottom:0;
+      width:600px;
+      height:200px;
+      overflow: hidden;
+      padding: 2em;
+      color: #333333;
+      overflow-y: auto;
+    }
+    .mx-home-modal-main { position: relative; }
+    .mx-home-modal-main i { position: absolute; top: 0.2em; right: 0.2em; font-weight: bold; cursor: pointer; font-size: 1.6em; }
+    .mx-home-modal-header { display: block; text-align: center; font-size: 2.2em }
+    .mx-home-modal-body { font-size: 1.3em }
+    .mx-home-modal-body p { text-indent: 2em; }
+    .mx-home-modal-bar { text-align: center; }
+    .mx-home-modal-bar button { background: #fc7e2c; border-radius: 3px; padding: 0.3em; border: none; margin: 0 auto; cursor: pointer; color: white; }
+    </style>
+  <script src="./jquery/jquery-1.8.3.min.js"></script>
+  <script src="./jquery/jquery.cookie.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      var
+        n = '_hmo',
+        fsv = function(v) { $.cookie(n, v, {path: '/'}); },
+        fgv = function() { return $.cookie(n); },
+        fcm = function(){ $('.mx-home-modal').hide(200); fsv('1'); },
+        fm = function() {
+          if ( '1' === fgv()) { return; }
+          $('.mx-home-modal').show();
+          $('.mx-home-modal-bar button, .mx-home-modal i').click(fcm);
+        };
+      fm();
+    });
+    </script>
+<body>
+<div class="mx-home-modal" style="display: none">
+      <div class="mx-home-modal-main">
+        <i>X</i>
+        <b class="mx-home-modal-header">《提示信息》</b>
+        <div class="mx-home-modal-body">
+          <h5 style="font-size: 14px; font-weight: bold;line-height:32px;margin-top:15px;">尊敬用户：</h5>
+          <p>欢迎来访问！！！</p>
+          <p style="text-align:right; margin-top: 2em;">作者：forevergang</p>
+          <p class="mx-home-modal-bar"><button type="button">知道了</button></p>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
