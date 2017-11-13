@@ -1,4 +1,5 @@
 <?php
+// 数据导出Excle格式
 error_reporting(E_ALL || ~E_NOTICE);
 /*
  *处理Excel导出
