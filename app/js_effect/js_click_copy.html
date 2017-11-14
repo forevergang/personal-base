@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>点击复制到剪切板</title>
+</head>
+<style>
+p {
+    font-size: 20px;
+}
+input {
+    width: 300px;
+    height: 30px;
+}
+</style>
+<body>
+    <p id="p1">这是P1标签</p>
+    <br/>
+    <p id="p2">这是P2标签</p>
+    <br/>
+    <input id="input" type="text" value="这里是输入框标签">
+    <br/>
+    <br/>
+    <textarea id="textarea" rows="3" cols="20">这里是textarea标签</textarea>
+    <br/>
+    <button onclick="copyToClipboard('p1')">复制P1</button>
+    <button onclick="copyToClipboard('p2')">复制P2</button>
+    <button onclick="copyToClipboard('input')">复制input</button>
+    <button onclick="copyToClipboard('textarea')">复制textarea</button>
+    <button onclick="copyArticle()">方法二复制</button>
+    <br/>
+    <br/>
+    <input type="text" placeholder="请将复制的内容右键粘贴进行查看" />
+</body>
+<script>
+  // 方法一：
+  function copyToClipboard(elementId) {
+    // 创建元素用于复制
+    var aux = document.createElement("input");
+
+    // 获取复制内容
+    var content = document.getElementById(elementId).innerHTML || document.getElementById(elementId).value;
+  
+    // 设置元素内容
+    aux.setAttribute("value", content);
+  
+    // 将元素插入页面进行调用
+    document.body.appendChild(aux);
+  
+    // 复制内容
+    aux.select();
+  
+    // 将内容复制到剪贴板
+    document.execCommand("copy");
+  
+    // 删除创建元素
+    document.body.removeChild(aux);
+  }
+</script>
+<script>
+  // 方法二
+  function copyArticle(event){
+    const range = document.createRange();
+    range.selectNode(document.getElementById('p1'));
+    const selection = window.getSelection();
+    if(selection.rangeCount > 0) selection.removeAllRanges();
+    selection.addRange(range);
+    document.execCommand('copy');
+    alert("已复制好，可贴粘。");
+  }
+  document.getElementById('copy').addEventListener('click', copyArticle, false);
+</script>
+</html>
