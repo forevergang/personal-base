@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>账户注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=no" name="format-detection">
+    <!-- css引入 -->
+    <link type="text/css" rel="stylesheet" href="../../public/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../../public/css/public.css">
+    <link type="text/css" rel="stylesheet" href="../../public/css/invest.css">
+    <!-- 前提引入jquery和validate -->
+    <script type="text/javascript" src="../../public/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../public/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="../../public/js/util.js"></script>
+  </head>
+
+<body class="resign">
+    <section class="container main">
+      <h4 class="tit text-center">注册</h4>
+      <div class="container">
+        <form id="registerform" name="registerform" action="{$Domain}register" method="post">
+          <section class="mes_box">
+            <p>
+              <img src="../../public/images/phone.svg" width="24">
+              <input type="number" name="phoneNumber" id="phoneNumber" placeholder="请输入手机号" value="" maxlength="11">
+            </p>
+            <p class="pr clearfix">
+              <img src="../../public/images/number.svg" width="22">
+              <input type="text" name="randVerifyCode" id="randVerifyCode" placeholder="请输入验证码">
+              <img class="yzm refresh" id="newVerfyCode" width="70" height="30" src="../../public/images/yzm.png">
+              <button class="icon_refresh refresh"></button>
+            </p>
+            <p>
+              <img src="../../public/images/number.svg" width="22">
+              <input type="number" id="verifycode" name="verifycode" placeholder="请输入短信验证码">
+              <input type="button" class="button-blue" id="reSendMobileCode" value="获取验证码">
+            </p>
+            <p class="password">
+              <img src="../../public/images/key.svg" width="22">
+              <input type="password" id="password" name="password" placeholder="设置密码，6-16位（字母、数字、符号）">
+              <img class="img hide_show" src="../../public/images/show_hide.svg" width="24">
+              <img class="img show_hide hide" src="../../public/images/show_hide02.svg" width="24">
+            </p>
+            <p>
+               <img src="../../public/images/invite.svg" width="24">
+              <input type="text"  name="inviteCode" id="inviteCode" placeholder="请输入邀请码（选填）" value="">
+            </p>
+            <div class="agreement clearfix">
+              <input class="checkbox pull-left" type="checkbox" name="confirm" id="confirm">
+              <p class="word pull-left">我已阅读并同意<a href="../../public/images/Register" target="_blank" class="g_color_j">《用户服务协议》</a></p>
+            </div>
+          </section>
+          <!--错误提示位置-->
+          <div class="because">
+            <p><img src="../../public/images/sign.svg"></p>
+            <p id="summary"></p>
+          </div>
+          <button type="submit" class="btn btn-warning btn_resign" id="next">立即注册</button>
+        </form>
+        <p>已有账号，<a href="./login" class="g_color_j">立即登录</a></p>
+      </div>
+    </section>
+
+    
+
+    <script type="text/javascript">
+      $(function(){
+
+         //  显示隐藏密码
+        var onoff = true;
+        $(".img").each(function (i){
+          $(".img").eq(i).click(function(){
+            $(this).addClass("hide").siblings(".img").removeClass("hide");
+            if(onoff){
+              $("#password").attr({"type":"text"})
+              onoff = !onoff;
+            }else{
+              $("#password").attr({"type":"password"})
+              onoff = !onoff;
+            }
+          });
+        })
+        
+      //用户注册
+      //是否是手机号
+      $.validator.addMethod('isMobile', function(value, element) {
+        return this.optional(element) || $jf.util.isMobile(value);
+      }, 'Please enter a valid mobile');
+      //密码校验
+      $.validator.addMethod('isPasswd', function(value, element) {
+        return this.optional(element) || $jf.util.isPasswd(value);
+      }, 'Please enter a valid password');
+      //图形验证码校验
+      $.validator.addMethod('isRandVerifyCode', function(value, element) {
+        return this.optional(element) || /[0-9a-zA-Z]{4}/.test(value);
+      }, 'Please enter a valid verify code in images');
+
+
+      var
+        form = $('#registerform'),
+        form_error_container = form.find('.because');
+        form_error_message   = form.find('#summary');
+
+      var validator0 = form.validate({
+        rules: {
+          phoneNumber : {required: true, isMobile: true,
+            remote: {
+              url: "{$Domain}existsMobile?_=20171111",
+              type: "post",
+              async : false,
+              data: {
+                flag: function() { return "1"; },
+                phoneNumber: function() { return $("#phoneNumber").val(); }
+              }
+            }
+          },
+          randVerifyCode: {required: true, isRandVerifyCode: true,
+            remote: {
+              url: "{$Domain}checkRandVerfyCode?_=20171111",
+              type: "post",
+              async : false,
+              data: {
+                flag: function() { return "1"; },
+                randVerfyCode: function() {return $("#randVerifyCode").val();}
+              }
+            },
+          },
+          verifycode: {required: true,
+            remote: {
+              url: "{$Domain}checkSmsVerfyCode",
+              type: "post",
+              dataType: "json",
+              async : false,
+              data: {
+                phoneNumber: function() { return $("#phoneNumber").val(); },
+                verifycode: function() { return $("#verifycode").val(); }
+              },
+            },
+          },
+          password: {required: true, minlength: 6, maxlength: 16, isPasswd: true},
+          confirm: {required: true},
+        },
+        messages: {
+          phoneNumber:    {required: '请输入手机号!', isMobile: '请输入有效的手机号!', remote:'手机号已注册!'},
+          randVerifyCode: {required: '请输入验证码!', isRandVerifyCode: '请输入有效的验证码', remote:'验证码错误!'},
+          verifycode:     {required: '请输入短信验证码!', remote:'短信验证码错误!'},
+          password:       {required: '请设置密码!', minlength: '密码长度为6-16位!', maxlength: '密码长度为6-16位!', isPasswd: '密码由字母,数字或符号组成!'},
+          confirm:        {required: '请阅读并同意用户协议!'},
+        },
+        errorContainer: form_error_container,
+        showErrors:function(errorMap,errorList) {
+          if (errorList.length == 0) {
+            form_error_message.html('');
+            form_error_container.hide();
+            return;
+          }
+          // 此处就是默认显示第一条错误信息 errorList[0].message   *************************
+          form_error_message.html(errorList[0].message);
+          form_error_container.show();
+          // this.defaultShowErrors();
+        },
+        submitHandler: function (f) {
+           var
+            url = form.attr('action'),
+            _opForm = function(op) { $(f).find('input,button').prop('disabled', op); };
+             _showMsg = function(value) { form_error_container.show().find('p:eq(1)').html(value); },
+          _opForm(true);
+          $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+              phoneNumber   : $(f).find('input[name=phoneNumber]').val(),
+              randVerfyCode : $(f).find('input[name=randVerifyCode]').val(),
+              verifycode    : $(f).find('input[name=verifycode]').val(),
+              password      : $(f).find('input[name=password]').val(),
+              inviteCode    : $(f).find('input[name=inviteCode]').val(),
+              confirm       : $(f).find('input[name=confirm]').val(),
+            },
+            
+            dataType: 'json',
+            timeout: 5000,
+            error: function(){ _opForm(false); _showMsg('登录错误'); },
+            success:function(data){
+              _opForm(false);
+              switch(data.code){
+                case  '10000': _showMsg('注册成功'); setTimeout(function(){ location.href='{$Domain}registerSuccess'; }, 500); break;
+                // case  '10001': _showMsg('图形验证码失效!');  break;
+                // ………………………………………ERROR LIST……………………………
+                default : _showMsg('网络异常，请联系管理员'); break;
+              }
+            }
+          });
+
+        }
+      });
+
+    
+      //发送验证码
+      $('#reSendMobileCode').click(function(){
+        // trigger phone validate
+        if (!validator0.element('#phoneNumber') || !validator0.element('#randVerifyCode')) {
+          return;
+        }
+        var
+          phoneNumber         = $('#phoneNumber').val();
+          randVerifyCode      = $('#randVerifyCode').val();
+          canResetLeftSeconds = 60;
+
+        $.ajax({
+          url : '{$Domain}sendRegistRand?_=20171111',
+          type: 'post',
+          data: {"phoneNumber": phoneNumber, "verifycode" : randVerifyCode},
+          success: function(data) {
+            if(data) {
+                var interval = setInterval(function() {
+                if(canResetLeftSeconds == 0) {
+                  $("#reSendMobileCode").attr('disabled',false);
+                  $("#reSendMobileCode").val("获取验证码");
+                  clearInterval(interval);
+                  return;
+                }
+                $("#reSendMobileCode").attr('disabled',true);
+                $("#reSendMobileCode").val("重新发送(" + canResetLeftSeconds + ")");
+                canResetLeftSeconds--;
+              }, 1000);
+            }
+          }
+        });
+      });
+    });
+    </script>
+  </body>
+  </html>
