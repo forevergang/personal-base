@@ -1,0 +1,128 @@
+body{
+  font-size: 0.26rem;
+}
+
+@media only screen and (min-width:240px) {
+  html {
+    font-size: 266.66666666%
+  }
+}
+
+@media only screen and (min-width:320px) {
+  html {
+    font-size: 266.66666666%
+  }
+}
+
+@media only screen and (min-width:360px) {
+  html {
+    font-size: 300%
+  }
+}
+
+@media only screen and (min-width:375px) {
+  html {
+    font-size: 312.5%
+  }
+}
+
+@media only screen and (min-width:414px) {
+  html {
+    font-size: 345%
+  }
+}
+
+@media only screen and (min-width:480px) {
+  html {
+    font-size: 400%
+  }
+}
+
+@media only screen and (min-width:640px) {
+  html {
+    font-size: 533.3333333333%
+  }
+}
+
+@media only screen and (min-width:750px) {
+  html {
+    font-size: 625%
+  }
+}
+
+.fl {
+  float: left
+}
+
+.fr {
+  float: right
+}
+
+.clearfix {
+  overflow: hidden;
+  _height: 1%
+}
+
+.clearfix:after {
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  zoom: 1
+}
+
+a {
+  text-decoration: none;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+  color:    #cdcdcd;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color:    #cdcdcd;
+  opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color:    #cdcdcd;
+  opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color:    #cdcdcd;
+}
+input{
+  outline: none;
+}
+textarea{
+  resize: none;
+}
+.g_pr{
+  position: relative;
+}
+.g_pa{
+  position: absolute;
+}
+.g_fx{
+  position: fixed;
+}
+li{list-style: none}
+/*内外边距*/
+.g_mt15{
+  margin-top: 15px;
+}
+.g_bg_fff{
+  background: #fff;
+}
+/*color, bg_color*/
+.g_bgc_gray{
+  background: #f6f7fb;
+}
+.g_color_j{
+  color: #ee8e38;
+}
+.g_color_cd{
+  color: #cdcdcd;
+}
+.g_fs12{
+  font-size: 12px;
+}

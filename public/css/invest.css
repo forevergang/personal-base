@@ -1,0 +1,128 @@
+/*注册*/
+.resign .main{
+  position: relative;
+  z-index:20;
+  margin-bottom: 150px;
+  background: #fff;
+}
+.resign .tit{
+  font-size: 24px;
+  color: #4a4a4a;
+  padding:0 0 15px 0;
+}
+.resign .mes_box input{
+  font-size: 13px;
+  color: #9e9e9e;
+}
+.resign .mes_box>p{
+  border-bottom:1px solid #bfbfbf;
+  padding:5px 0 8px 5px;
+  position: relative;
+}
+.resign .mes_box>p:nth-child(1){
+  padding-left:2px;
+}
+.resign .mes_box p img{
+  margin-right: 5px;
+}
+.resign .mes_box p input{
+  width:55%;
+  border:0;
+  padding:5px;
+}
+.resign .mes_box .yzm{
+  position: absolute;
+  right: 26px;
+  top:3px;
+  border: none;
+}
+.resign .mes_box button:focus{outline:0;}
+.resign .mes_box .icon_refresh{
+  position: absolute;
+  right: 0px;
+  top:8px;
+  border: none;
+  background: url("../images/icon_refresh.png") no-repeat;
+  width: 18px;
+  height: 20px;
+  background-size:auto 100% ;
+}
+.resign .mes_box p:nth-child(2) img:last-child{
+  position: absolute;
+  right:0;
+  top:0;
+}
+.resign .mes_box p:nth-child(3){
+  color: #b6b5b5;
+}
+.resign .mes_box p:nth-child(3) input{
+  width:60%;
+}
+.resign .mes_box p:nth-child(4) input {
+  width:70%;
+}
+.resign .mes_box p:nth-child(3) input:last-child {
+  width:80px;
+  position: absolute;
+  right:0;
+  top:5px;
+  background: #fff;
+  color: #ee8e38;
+}
+.resign .mes_box p.password img.img{
+  position: absolute;
+  right:0;
+  top:6px;
+}
+.resign .agreement{
+  padding:10px 0;
+}
+.resign .agreement input{
+  border:1px solid #ee8e38;
+  border-radius:0;
+}
+.resign .agreement p{
+  padding-left:10px;
+  padding-top:2px;
+}
+
+.resign .btn_resign{
+  width:100%;
+  border-radius:0;
+  font-size: 16px;
+  padding:8px 12px;
+  margin-bottom: 20px;
+}
+.resign_account .tit{
+  padding:20px 0;
+}
+.resign_account .mes_box{
+  padding-bottom: 40px;
+}
+.resign .because {
+  background-position: center bottom;
+  background-size: 100% auto;
+  font-size: 12px;
+  margin-bottom: 15px;
+  color: #ee6338;
+  height:20px;
+}
+.resign_account .because{
+  padding-top:10px;
+  margin-bottom:-15px;
+  height: 33px;
+}
+.resign .because p:nth-child(1){
+  position: absolute;
+}
+.resign .because p:nth-child(2){
+  margin-left:25px;
+}
+.resign .because img{
+  width:18px;
+  height:18px;
+  position: relative;
+  top:-2px;
+  margin-right: 5px;
+}
+.because{ height: 25px; line-height: 25px; display: none }
