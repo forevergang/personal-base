@@ -7,7 +7,7 @@ ROOT
 ├── app                   程序目录
 │   ├── export_data       数据导出csv以及Excle格式
 │   │   │
-│   │   └──│  
+│   │   └── 
 │   ├── jquery_validate   jquery_validate插件示例
 │   │   │
 │   │   └──
